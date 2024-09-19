@@ -1,0 +1,378 @@
+paths:
+
+  /products/:
+
+    get:
+
+      summary: Obtiene todos los Productos
+
+      tags:
+
+        - Products
+
+      responses:
+
+        "200":
+
+          description: Datos obtenidos satisfactoriamente
+
+          content:
+
+            application/json:
+
+              schema:
+
+                type: array
+
+                items:
+
+                  $ref: "#/components/schemas/Product"
+
+        "500":
+
+          description: Error interno del servidor
+
+    post:
+
+      summary: Crea un nuevo producto
+
+      tags:
+
+        - Products
+
+      requestBody:
+
+        required: true
+
+        content:
+
+          application/json:
+
+            schema:
+
+              $ref: "#/components/requestBodies/CreateProduct"
+
+      responses:
+
+        "200":
+
+          description: Producto creado correctamente
+
+          content:
+
+            application/json:
+
+              schema:
+
+                $ref: "#/components/schemas/Product"
+
+        "500":
+
+          description: Error interno del servidor
+
+    delete:
+
+      summary: Elimina un producto por ID
+
+      tags:
+
+        - Products
+
+      parameters:
+
+        - name: pid
+
+          in: path
+
+          required: true
+
+          description: ID del Producto que se desea eliminar
+
+          schema:
+
+            type: string
+
+      responses:
+
+        "200":
+
+          description: Producto eliminado correctamente
+
+          content:
+
+            application/json:
+
+              schema:
+
+                type: object
+
+                properties:
+
+                  message:
+
+                    type: string
+
+                    example: Producto eliminado correctamente
+
+        "404":
+
+          description: Producto no encontrado
+
+          content:
+
+            application/json:
+
+              schema:
+
+                type: object
+
+                properties:
+
+                  error:
+
+                    type: string
+
+                    example: Producto no encontrado
+
+        "500":
+
+          description: Error interno del servidor
+
+
+  /products/update:
+
+    put:
+
+      summary: Actualiza un producto por id
+
+      tags:
+
+        - Products
+
+      parameters:
+
+        - name: pid
+
+          in: path
+
+          required: true
+
+          description: ID del Producto que se solicita
+
+          schema:
+
+            type: string
+
+      requestBody:
+
+        required: true
+
+        content:
+
+          application/json:
+
+            schema:
+
+              $ref: "#/components/requestBodies/UpdateProduct"
+
+      responses:
+
+        "200":
+
+          description: Producto actualizado correctamente
+
+          content:
+
+            application/json:
+
+              schema:
+
+                $ref: "#/components/schemas/Products"
+
+        "500":
+
+          description: Error interno del servidor
+
+components:
+
+  schemas:
+
+    Products:
+
+      type: object
+
+      properties:
+
+        _id:
+
+          type: string
+
+          description: ID generado en MongoDB
+
+        name:
+
+          type: string
+
+          description: Nombre del producto
+
+        description:
+
+          type: string
+
+          description: Descripcion del producto
+
+        price:
+
+          type: number
+          
+          description: Precio del producto
+        
+        category:
+
+          type: string
+          
+          description: Categoria en la cual se encuentra el producto
+        
+        available:
+
+          type: boolean
+          
+          description: Disponibilidad del producto
+        
+        owner:
+
+          type: number
+          
+          description: Codigo del propietario del producto
+        
+      example:
+
+        _id: "1f541bvs6t123bt"
+
+        name: Mani con chocolate
+
+        description: Mani cubiertos de chocolate
+
+        price: 254
+
+        categoy: Golosinas
+
+        available: true
+
+        owner: 1235467897
+
+  requestBodies:
+
+    CreateProduct:
+
+      type: object
+
+      properties:
+
+        name:
+
+          type: string
+
+          description: Nombre del producto
+
+        description:
+
+          type: string
+
+          description: Descripcion del producto
+
+        price:
+
+          type: number
+          
+          description: Precio del producto
+
+        category:
+
+          type: string
+
+          description: Categoria en la cual se encuentra el producto
+
+        available:
+        
+          type: boolean
+
+          description: Disponibilidad del producto
+
+        owner:
+
+          type: number
+
+          description: Codigo del propietario del producto
+
+      example:
+
+        name: Mani con chocolate
+
+        description: Mani cubiertos de chocolate
+
+        price: 254
+
+        category: Golosinas
+
+        available: true
+
+        owner: 1235467897
+
+
+    UpdateProduct:
+
+      type: object
+
+      properties:
+
+        name:
+
+          type: string
+
+          description: Nombre del producto
+
+        description:
+
+          type: string
+
+          description: Descripcion del producto
+
+        price:
+
+          type: number
+          
+          description: Precio del producto
+        
+        category:
+
+          type: string
+          
+          description: Categoria en la cual se encuentra el producto
+        
+        available:
+
+          type: boolean
+          
+          description: Disponibilidad del producto
+        
+        owner:
+
+          type: number
+          
+          description: Codigo del propietario del producto
+        
+      example:
+
+        name: Mani con chocolate
+
+        description: Mani cubiertos de chocolate
+
+        price: 254
+
+        categoy: Golosinas
+
+        available: true
+
+        owner: 1235467897
+

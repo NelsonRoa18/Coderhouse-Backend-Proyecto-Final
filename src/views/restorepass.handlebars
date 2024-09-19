@@ -1,0 +1,11 @@
+<h2>Restaurar Contraseña</h2>
+  {{#if error}}
+    <p style="color: red;">{{error}}</p>
+  {{/if}}
+<form action="/api/sessions/restorepass" method="POST">
+    <input type="hidden" name="token" value="{{token}}" />
+    <label for="password">Contraseña nueva:</label>
+    <input type="password" name="password" required>
+    <button type="submit">Guardar constraseña</button>
+</form>
+

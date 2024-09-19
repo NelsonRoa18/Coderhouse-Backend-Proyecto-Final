@@ -1,0 +1,22 @@
+
+    <h1>Carrito de Compras</h1>
+    <h4>Usuario: {{userEmail}}</h4>
+    {{#if products.length}}
+        <ul>
+            {{#each products}}
+                <li>
+                    <strong>Nombre:</strong> <p>{{this.name}}</p> <br>
+                    <strong>Precio:</strong> <p>{{this.price}}</p> <br>
+                </li>
+            {{/each}}
+        </ul>
+        <button id="finalizePurchase">Finalizar compra</button>
+    {{else}}
+        <p>No hay productos en el carrito.</p>
+    {{/if}}
+
+    <div id="buttons"></div>
+    <ol id="products"></ol>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/carts.js"></script>
