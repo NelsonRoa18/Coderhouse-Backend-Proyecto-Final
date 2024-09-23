@@ -36,8 +36,30 @@ router.get('/profile', isAuthenticated, (req, res) => {
 
 router.get('/users', async(req, res) =>{
     if (req.session.user.rol == "admin") {
-        res.render('users', {user:req.session.user})
-    }  
+        const data = await userManager.find();
+        const users = [];
+        for (let i = 0; i < data.length; i++) {
+            const element = data[i];
+
+            if (element.rol !== "admin") {
+                users.push(element)
+            }
+            else{
+                data.splice(0,i)
+            }
+        }
+
+        res.render('users', {user:req.session.user, users})
+    }
+    else{
+        res.render('profileUser', {user: req.session.user})
+    }
+})
+
+router.post('/users', async(req, res) => {
+    const {id} = req.body;
+
+    res.render('updateUsers', {user:id})
 })
 
 const secretKey = 'restore_pass';

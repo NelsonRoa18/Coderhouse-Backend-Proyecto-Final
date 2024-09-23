@@ -1,25 +1,48 @@
-<div style="display:flex;align-content: center;justify-content: end;text-align: center;align-items: center;gap: 10px 10px;"></div>
-    <div>
+<div
+    style="display:flex;align-content: center;justify-content: end;text-align: center;align-items: center;gap: 10px 10px;">
+</div>
+<div>
     <h2>Bienvenido</h2>
-    </div>
+</div>
 
-    <div>
+<div>
     <p>Nombre: {{user.first_name}}</p>
     <p>Apellido: {{user.last_name}}</p>
-    </div>
+</div>
 <div>
     <form action="/api/sessions/logout" method="POST">
-    <button type="submit">Cerrar Sesión</button>
+        <button type="submit">Cerrar Sesión</button>
 </div>
 
 <div style="display: flex;"></div>
-    <div style="width: 50%;">
-        <h1>Usuarios</h1>
-        <div>
-            <div id="DivUsers">
+<div style="width: 50%;">
+    <h1>Usuarios</h1>
+    <div>
+        <div id="DivUsers">
+            {{#if users.length}}
+            <ul>
+                {{#each users}}
+                <li data-id={{this.email}}>
+                    <strong>Nombre:</strong>
+                    <p>{{this.first_name}}</p> <br>
+                    <strong>email:</strong>
+                    <p>{{this.email}}</p> <br>
+                    <strong>rol:</strong>
+                    <p>{{this.rol}}</p> <br>
+                    <button id="Update_User" type="button"> Modificar</button>
+                    <button id="Delete_User" type="button"> Eliminar</button>
+                </li>
 
-            </div>
-
+                {{/each}}
+            </ul>
+            {{else}}
+            <p>No hay productos en el carrito.</p>
+            {{/if}}
         </div>
+
     </div>
 </div>
+</div>
+
+
+<script src="/js/users.js"></script>
